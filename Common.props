@@ -1,0 +1,23 @@
+<Project>
+
+  <PropertyGroup>
+	  <Version>8.0.0</Version>
+	  <Company>EleCho</Company>
+	  <Authors>SlimeNull;ilyfairy</Authors>
+	  <PackageIcon>nuget.png</PackageIcon>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
+	  <Description>CommunityToolkit.Mvvm with low version target framework support</Description>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\nuget.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>

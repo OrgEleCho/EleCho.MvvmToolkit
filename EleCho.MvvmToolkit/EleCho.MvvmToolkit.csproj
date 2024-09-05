@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net45;net46;net462;net47;net48;net6.0;net8.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<LangVersion>12.0</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<Import Project="..\Common.props" />
+
+	<!-- Necessary polyfills -->
+	<PropertyGroup>
+		<PolySharpIncludeGeneratedTypes>
+			System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute;
+			System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute;
+			System.Diagnostics.CodeAnalysis.MemberNotNullAttribute;
+			System.Diagnostics.CodeAnalysis.NotNullAttribute;
+			System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute;
+			System.Diagnostics.CodeAnalysis.NotNullWhenAttribute;
+			System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute;
+			System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute;
+			System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute;
+			System.Runtime.CompilerServices.CallerArgumentExpressionAttribute;
+			System.Runtime.CompilerServices.IsExternalInit;
+			System.Runtime.CompilerServices.SkipLocalsInitAttribute;
+		</PolySharpIncludeGeneratedTypes>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PolySharp" Version="1.14.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
+
+		<ProjectReference Include="..\EleCho.MvvmToolkit.SourceGenerator\EleCho.MvvmToolkit.SourceGenerator.csproj" ReferenceOutputAssembly="False" />
+		<ProjectReference Include="..\EleCho.MvvmToolkit.CodeFixers\EleCho.MvvmToolkit.CodeFixers.csproj" ReferenceOutputAssembly="False" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net47'">
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+	</ItemGroup>
+
+	<Target Name="PackAnalyzer" BeforeTargets="Build">
+		<ItemGroup>
+			<None Include="..\EleCho.MvvmToolkit.SourceGenerator\bin\$(Configuration)\netstandard2.0\EleCho.MvvmToolkit.SourceGenerator.dll" Pack="True" PackagePath="\analyzers\dotnet" />
+			<None Include="..\EleCho.MvvmToolkit.CodeFixers\bin\$(Configuration)\netstandard2.0\EleCho.MvvmToolkit.CodeFixers.dll" Pack="True" PackagePath="\analyzers\dotnet" />
+		</ItemGroup>
+	</Target>
+
+</Project>
